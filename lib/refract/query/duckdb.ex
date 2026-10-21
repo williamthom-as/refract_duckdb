@@ -162,6 +162,9 @@ defmodule Refract.Query.DuckDB do
   defp converter("HUGEINT"), do: &Duckdbex.hugeint_to_integer/1
   defp converter(_type), do: &Function.identity/1
 
+  defp decimal({{lower, upper}, width, scale}),
+    do: decimal({Duckdbex.hugeint_to_integer({upper, lower}), width, scale})
+
   defp decimal({coefficient, _width, scale}) when coefficient < 0,
     do: Decimal.new(-1, -coefficient, -scale)
 

@@ -137,6 +137,15 @@ defmodule Refract.Query.DuckDBTest do
       assert n == Decimal.new("-2.55")
     end
 
+    test "wide decimals come back as Decimal" do
+      sql =
+        "SELECT sum(CAST(1.25 AS DECIMAL(18, 2))) AS s, CAST(-123456789012345678901234567.89 AS DECIMAL(38, 2)) AS w"
+
+      assert [%{"s" => s, "w" => w}] = rows!(open!(), sql)
+      assert s == Decimal.new("1.25")
+      assert w == Decimal.new("-123456789012345678901234567.89")
+    end
+
     test "dates, timestamps and times come back as Elixir values" do
       sql =
         "SELECT DATE '2026-10-21' AS d, TIMESTAMP '2026-10-21 09:30:00.123456' AS ts, TIME '09:30:00' AS t"

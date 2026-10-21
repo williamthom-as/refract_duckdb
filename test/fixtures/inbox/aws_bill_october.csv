@@ -1,0 +1,3 @@
+lineItem/UsageAccountId,lineItem/ProductCode,lineItem/UsageStartDate,lineItem/UnblendedCost
+123456789012,AmazonEC2,2026-10-01T00:00:00Z,1.30
+555566667777,AmazonRDS,2026-10-01T00:00:00Z,4.10
