@@ -59,7 +59,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: refract_duckdb/priv/plts
-        key: ${{ runner.os }}-plt-otp28.5-elixir1.20.2-${{ hashFiles('refract_duckdb/mix.lock', 'refract_duckdb/mix.exs', 'refract/mix.lock') }}
+        key: ${{ runner.os }}-plt-otp28.5-elixir1.20.2-${{ hashFiles('refract_duckdb/mix.lock', 'refract_duckdb/mix.exs', 'refract/mix.lock', 'refract/lib/**/*.ex') }}
     - name: Build PLT
       run: mix dialyzer --plt
     - name: Dialyzer
