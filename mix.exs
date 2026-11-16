@@ -5,7 +5,7 @@ defmodule RefractDuckdb.MixProject do
     [
       app: :refract_duckdb,
       version: "0.1.0",
-      elixir: "~> 1.17",
+      elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
@@ -33,12 +33,19 @@ defmodule RefractDuckdb.MixProject do
 
   defp deps do
     [
-      {:refract, path: "../refract"},
+      refract_dep(:refract, "refract_core", "v0.1.0"),
       {:duckdbex, "~> 0.5"},
       {:decimal, "~> 2.0 or ~> 3.0"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:ex_slop, "~> 0.4", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
+  end
+
+  defp refract_dep(app, repo, tag, opts \\ []) do
+    case System.get_env("#{String.upcase(to_string(app))}_PATH") do
+      nil -> {app, [github: "williamthom-as/#{repo}", tag: tag] ++ opts}
+      path -> {app, [path: path, override: true] ++ opts}
+    end
   end
 end

@@ -1,6 +1,6 @@
 # refract_duckdb
 
-duckdb query engine for [refract](https://github.com/williamthom-as/refract)'s `Refract.Query`.
+duckdb query engine for [refract](https://github.com/williamthom-as/refract_core)'s `Refract.Query`.
 
 - `Refract.Query.DuckDB` implements `Refract.Query.Engine`, built on `duckdbex` (DuckDB 1.5)
 - in memory by default, or a database file with `path:`
@@ -20,6 +20,13 @@ result = Refract.Query.run!(query, "SELECT plan, count(*) AS bills FROM bill JOI
 ## Install
 
 ```elixir
-{:refract, path: "../refract"},
-{:refract_duckdb, path: "../refract_duckdb"}
+{:refract_duckdb, github: "williamthom-as/refract_duckdb", tag: "v0.1.0"}
 ```
+
+## Development
+
+against local checkouts: `REFRACT_PATH=../refract mix test`
+
+## License
+
+Apache-2.0, see [LICENSE](LICENSE).
